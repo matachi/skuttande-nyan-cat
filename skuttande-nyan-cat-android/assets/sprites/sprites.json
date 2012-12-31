@@ -1,0 +1,20 @@
+[
+{
+    "guid":         "background",
+    "animated":     "false",
+},
+{
+    "guid":         "background-city",
+    "animated":     "false",
+},
+{
+    "guid":         "nyan-cat",
+    "animated":     "true",
+    "delay":        0.10,
+    "tiles":        4
+},
+{
+    "guid":         "pole",
+    "animated":     "false"
+}
+]
