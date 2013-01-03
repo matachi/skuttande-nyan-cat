@@ -8,7 +8,6 @@
 	<classpathentry kind="lib" path="/skuttande-nyan-cat/libs/gdx-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-backend-gwt.jar" sourcepath="war/WEB-INF/lib/gdx-backend-gwt-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-backend-gwt-sources.jar"/>
-	<classpathentry kind="lib" path="/skuttande-nyan-cat/libs/artemis.jar" sourcepath="/skuttande-nyan-cat/libs/artemis-sources.jar"/>
-	<classpathentry kind="lib" path="/skuttande-nyan-cat/libs/artemis-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/artemis-gwt-a609b2076aacc0ef5ecf0b390205d01bb88ceae2.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

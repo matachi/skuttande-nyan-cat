@@ -49,18 +49,23 @@ public class SpriteRenderSystem extends EntitySystem {
 	private Comparator<Entity> sortedEntityComparator;
 
 	@SuppressWarnings("unchecked")
-	public SpriteRenderSystem(OrthographicCamera camera) {
+	public SpriteRenderSystem(OrthographicCamera camera, SpriteBatch batch) {
 		super(Aspect.getAspectForAll(Position.class, Sprite.class));
 		this.camera = camera;
 		this.sortedEntities = new ArrayList<Entity>();
 		this.sortedEntityComparator = new Comparator<Entity>() {
 			@Override
 			public int compare(Entity e1, Entity e2) {
-				Position p1 = pm.get(e1);
-				Position p2 = pm.get(e2);
-				return (int) (1000 * (p2.getY() - p1.getY()));
+				Sprite s1 = sm.get(e1);
+				Sprite s2 = sm.get(e2);
+				if (s1.layer.getLayerId() > s2.layer.getLayerId()) {
+					return 1;
+				} else {
+					return -1;
+				}
 			}
 		};
+		this.batch = batch;
 	}
 
 	@Override
@@ -96,7 +101,7 @@ public class SpriteRenderSystem extends EntitySystem {
 			}
 		}
 
-		batch = new SpriteBatch();
+//		batch = new SpriteBatch();
 
 		sortedEntities = new ArrayList<Entity>();
 
@@ -192,10 +197,9 @@ public class SpriteRenderSystem extends EntitySystem {
 			batch.setColor(sprite.r, sprite.g, sprite.b, sprite.a);
 
 			float posX = position.getX()
-					- (spriteRegion.getRegionWidth() / 2 * sprite.scaleX);
+					- (spriteRegion.getRegionWidth() / 2 * sprite.scaleX) - sprite.offset;
 			float posY = position.getY()
-					- (spriteRegion.getRegionHeight() / 2 * sprite.scaleX)
-					+ sprite.offset;
+					- (spriteRegion.getRegionHeight() / 2 * sprite.scaleX);
 			batch.draw(spriteRegion, posX, posY, 0, 0,
 					spriteRegion.getRegionWidth(),
 					spriteRegion.getRegionHeight(), sprite.scaleX,
@@ -225,10 +229,9 @@ public class SpriteRenderSystem extends EntitySystem {
 			TextureRegion currentFrame = spriteRegion.getKeyFrame(time, true);
 
 			float posX = position.getX()
-					- (currentFrame.getRegionWidth() / 2 * sprite.scaleX);
+					- (currentFrame.getRegionWidth() / 2 * sprite.scaleX) - sprite.offset;
 			float posY = position.getY()
-					- (currentFrame.getRegionHeight() / 2 * sprite.scaleX)
-					+ sprite.offset;
+					- (currentFrame.getRegionHeight() / 2 * sprite.scaleX);
 			batch.draw(currentFrame, posX, posY, 0, 0,
 					currentFrame.getRegionWidth(),
 					currentFrame.getRegionHeight(), sprite.scaleX,
@@ -252,6 +255,7 @@ public class SpriteRenderSystem extends EntitySystem {
 
 	@Override
 	protected void removed(Entity e) {
+		sortedEntities.remove(e);
 	}
 
 }
