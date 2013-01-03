@@ -18,10 +18,10 @@ scaling0: 1.0
 timelineCount: 1
 timeline0: 0.0
 - Life - 
-lowMin: 0.0
-lowMax: 0.0
-highMin: 1500.0
-highMax: 1500.0
+lowMin: 2500.0
+lowMax: 2500.0
+highMin: 2500.0
+highMax: 2500.0
 relative: false
 scalingCount: 3
 scaling0: 1.0
@@ -63,7 +63,7 @@ timeline0: 0.0
 lowMin: 0.0
 lowMax: 0.0
 highMin: 16.0
-highMax: 16.0
+highMax: 36.0
 relative: false
 scalingCount: 2
 scaling0: 0.0
@@ -169,10 +169,10 @@ scaling0: 1.0
 timelineCount: 1
 timeline0: 0.0
 - Life - 
-lowMin: 0.0
-lowMax: 0.0
-highMin: 1500.0
-highMax: 1500.0
+lowMin: 2500.0
+lowMax: 2500.0
+highMin: 2500.0
+highMax: 2500.0
 relative: false
 scalingCount: 3
 scaling0: 1.0
@@ -211,10 +211,10 @@ scaling0: 1.0
 timelineCount: 1
 timeline0: 0.0
 - Scale - 
-lowMin: 16.0
+lowMin: 6.0
 lowMax: 16.0
 highMin: 24.0
-highMax: 24.0
+highMax: 54.0
 relative: false
 scalingCount: 2
 scaling0: 0.0
@@ -230,7 +230,7 @@ highMin: 30.0
 highMax: 300.0
 relative: false
 scalingCount: 2
-scaling0: 0.0
+scaling0: 1.0
 scaling1: 1.0
 timelineCount: 2
 timeline0: 0.0

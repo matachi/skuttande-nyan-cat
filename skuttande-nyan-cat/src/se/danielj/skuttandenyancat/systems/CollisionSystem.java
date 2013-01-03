@@ -6,6 +6,7 @@ import se.danielj.skuttandenyancat.components.Position;
 import se.danielj.skuttandenyancat.components.Size;
 import se.danielj.skuttandenyancat.components.Velocity;
 import se.danielj.skuttandenyancat.misc.Constants;
+import se.danielj.skuttandenyancat.misc.Score;
 import se.danielj.skuttandenyancat.misc.State;
 
 import com.artemis.Aspect;
@@ -26,20 +27,22 @@ public class CollisionSystem extends EntitySystem {
 	ComponentMapper<Velocity> vm;
 
 	private Bag<CollisionPair> collisionPairs;
+
+	private Entity cat;
 	
-//	private 
+	private Position catPos;
 
 	@SuppressWarnings("unchecked")
 	public CollisionSystem() {
-		super(Aspect.getAspectForAll(Position.class, Size.class));
+		super(Aspect.getAspectForAll(Position.class, Size.class, Player.class));
 	}
 
 	@Override
 	public void initialize() {
 		collisionPairs = new Bag<CollisionPair>();
 
-		collisionPairs.add(new CollisionPair(Constants.Groups.CAT,
-				Constants.Groups.POLE, new CollisionHandler() {
+		collisionPairs.add(new CollisionPair(Constants.Groups.POLE,
+				new CollisionHandler() {
 					@Override
 					public void handleCollision(Entity cat, Entity pole) {
 						// Cat
@@ -50,6 +53,9 @@ public class CollisionSystem extends EntitySystem {
 						Position pp = pm.get(pole);
 						Size sp = sm.get(pole);
 
+						if (prevY - sc.getHeight() / 2 < pp.getY() + sp.getHeight() / 2) {
+							return;
+						}
 						vc.setY(0);
 						pc.setY(sc.getHeight() / 2 + pp.getY() + sp.getHeight()
 								/ 2);
@@ -60,15 +66,16 @@ public class CollisionSystem extends EntitySystem {
 							State.setRunning(true);
 						}
 						running = true;
+						Score.addScore(1000 * world.getDelta());
 					}
 				}));
 	}
-	
+
 	private boolean running;
 
 	private float prevX = 0;
 	private float prevY = 0;
-	
+
 	@Override
 	protected void processEntities(ImmutableBag<Entity> entities) {
 		running = false;
@@ -77,41 +84,38 @@ public class CollisionSystem extends EntitySystem {
 		}
 		if (!running) {
 			State.setRunning(false);
+			Score.addScoreToTotal();
 		}
+		prevX = catPos.getX();
+		prevY = catPos.getY();
 	}
 
 	@Override
 	protected boolean checkProcessing() {
 		return true;
 	}
-	
+
 	@Override
 	protected void inserted(Entity e) {
-		
+		cat = e;
+		catPos = pm.get(cat);
 	}
 
 	private class CollisionPair {
-		private ImmutableBag<Entity> groupEntitiesA;
-		private ImmutableBag<Entity> groupEntitiesB;
+		private ImmutableBag<Entity> groupEntities;
 		private CollisionHandler handler;
 
-		public CollisionPair(String group1, String group2,
-				CollisionHandler handler) {
-			groupEntitiesA = world.getManager(GroupManager.class).getEntities(
-					group1);
-			groupEntitiesB = world.getManager(GroupManager.class).getEntities(
-					group2);
+		public CollisionPair(String group, CollisionHandler handler) {
+			groupEntities = world.getManager(GroupManager.class).getEntities(
+					group);
 			this.handler = handler;
 		}
 
 		public void checkForCollisions() {
-			for (int a = 0; groupEntitiesA.size() > a; a++) {
-				for (int b = 0; groupEntitiesB.size() > b; b++) {
-					Entity entityA = groupEntitiesA.get(a);
-					Entity entityB = groupEntitiesB.get(b);
-					if (collisionExists(entityA, entityB)) {
-						handler.handleCollision(entityA, entityB);
-					}
+			for (int a = 0; groupEntities.size() > a; a++) {
+				Entity entity = groupEntities.get(a);
+				if (collisionExists(cat, entity)) {
+					handler.handleCollision(cat, entity);
 				}
 			}
 		}

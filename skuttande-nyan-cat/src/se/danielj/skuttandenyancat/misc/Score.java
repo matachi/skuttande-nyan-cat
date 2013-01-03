@@ -24,7 +24,9 @@ public class Score {
 	}
 	
 	public static void addScoreToTotal() {
-		totalScore += score;
-		score = 0;
+		if (score > 0) {
+			totalScore += score;
+			score = 0;
+		}
 	}
 }

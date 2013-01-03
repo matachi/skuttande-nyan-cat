@@ -5,6 +5,7 @@ import se.danielj.skuttandenyancat.systems.CameraSystem;
 import se.danielj.skuttandenyancat.systems.CollisionSystem;
 import se.danielj.skuttandenyancat.systems.EffectSystem;
 import se.danielj.skuttandenyancat.systems.GravitySystem;
+import se.danielj.skuttandenyancat.systems.HudRenderSystem;
 import se.danielj.skuttandenyancat.systems.MovementSystem;
 import se.danielj.skuttandenyancat.systems.ParallaxBackgroundSystem;
 import se.danielj.skuttandenyancat.systems.PlayerInputSystem;
@@ -26,6 +27,7 @@ public class Game implements ApplicationListener {
 	private World world;
 	
 	private SpriteRenderSystem spriteRenderSystem;
+	private HudRenderSystem hudRenderSystem;
 	private EffectSystem particleEffectSystem;
 	
 	@Override
@@ -57,6 +59,7 @@ public class Game implements ApplicationListener {
 		
 		particleEffectSystem = world.setSystem(new EffectSystem(batch), true);
 		spriteRenderSystem = world.setSystem(new SpriteRenderSystem(camera, batch), true);
+		hudRenderSystem = world.setSystem(new HudRenderSystem(batch, camera), true);
 		world.initialize();
 		EntityFactory.createBackground(world, 0, 0).addToWorld();
 		EntityFactory.createBackground(world, 2399, 0).addToWorld();
@@ -80,6 +83,7 @@ public class Game implements ApplicationListener {
 	    
 		spriteRenderSystem.process();
 		particleEffectSystem.process();
+		hudRenderSystem.process();
 	}
 
 	@Override
