@@ -62,12 +62,12 @@ public class Game implements ApplicationListener {
 		hudRenderSystem = world.setSystem(new HudRenderSystem(batch, camera), true);
 		world.initialize();
 		EntityFactory.createBackground(world, 0, 0).addToWorld();
-		EntityFactory.createBackground(world, 2399, 0).addToWorld();
-		EntityFactory.createBackground2(world, 0, -200).addToWorld();
-		EntityFactory.createBackground2(world, 2399, -200).addToWorld();
-		EntityFactory.createNyanCat(world, -100, 200).addToWorld();
-		EntityFactory.createPole(world, 0, -200).addToWorld();
-		EntityFactory.createPole(world, 800, -200).addToWorld();
+		EntityFactory.createBackground(world, 1200 * Constants.ZOOM, 0).addToWorld();
+		EntityFactory.createBackground2(world, 0, -100 * Constants.ZOOM).addToWorld();
+		EntityFactory.createBackground2(world, 1200 * Constants.ZOOM, -100 * Constants.ZOOM).addToWorld();
+		EntityFactory.createNyanCat(world, -50 * Constants.ZOOM, 100 * Constants.ZOOM).addToWorld();
+		EntityFactory.createPole(world, 0, -100 * Constants.ZOOM).addToWorld();
+		EntityFactory.createPole(world, 400 * Constants.ZOOM, -100 * Constants.ZOOM).addToWorld();
 	}
 
 	@Override

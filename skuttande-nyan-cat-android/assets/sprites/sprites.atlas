@@ -31,3 +31,17 @@ pole
   orig: 81, 125
   offset: 0, 0
   index: -1
+pause
+  rotate: false
+  xy: 603, 333
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+pixel
+  rotate: false
+  xy: 857, 397
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1

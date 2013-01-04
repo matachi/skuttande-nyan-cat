@@ -16,6 +16,8 @@ public class PoleSpawnerSystem extends IntervalEntitySystem {
 
 	@Override
 	protected void processEntities(ImmutableBag<Entity> entities) {
-		EntityFactory.createPole(world, Constants.FRAME_WIDTH, -200).addToWorld();
+		float xMod = 50 * (float) Math.random();
+		float yMod = 200 * (float) Math.random();
+		EntityFactory.createPole(world, Constants.FRAME_WIDTH / 2 + xMod + 130, (-50 - yMod) * Constants.ZOOM).addToWorld();
 	}
 }

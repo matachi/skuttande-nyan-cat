@@ -24,14 +24,14 @@ public class EntityFactory {
 		e.addComponent(position);
 		
 		Velocity velocity = new Velocity();
-		velocity.setX(-50);
+		velocity.setX(-25 * Constants.ZOOM);
 		e.addComponent(velocity);
 		
 		e.addComponent(new ParallaxBackground());
 		
 		Sprite sprite = new Sprite();
         sprite.name = "background";
-        sprite.scaleX = sprite.scaleY = 4;
+        sprite.scaleX = sprite.scaleY = Constants.ZOOM * 2;
         sprite.layer = Sprite.Layer.BACKGROUND;
         e.addComponent(sprite);
 
@@ -47,14 +47,14 @@ public class EntityFactory {
 		e.addComponent(position);
 		
 		Velocity velocity = new Velocity();
-		velocity.setX(-100);
+		velocity.setX(-50 * Constants.ZOOM);
 		e.addComponent(velocity);
 		
 		e.addComponent(new ParallaxBackground());
 		
 		Sprite sprite = new Sprite();
         sprite.name = "background-city";
-        sprite.scaleX = sprite.scaleY = 4;
+        sprite.scaleX = sprite.scaleY = Constants.ZOOM * 2;
         sprite.layer = Sprite.Layer.ACTORS_1;
         e.addComponent(sprite);
 
@@ -70,12 +70,12 @@ public class EntityFactory {
 		e.addComponent(position);
 		
 		Size size = new Size();
-		size.setWidth(33 * 2);
-		size.setHeight(31 * 2);
+		size.setWidth((int)(33 * Constants.ZOOM));
+		size.setHeight((int)(31 * Constants.ZOOM));
 		e.addComponent(size);
 		
 		Gravity gravity = new Gravity();
-		gravity.setForce(-1000);
+		gravity.setForce(-500 * Constants.ZOOM);
 		e.addComponent(gravity);
 		
 		Velocity velocity = new Velocity();
@@ -84,8 +84,8 @@ public class EntityFactory {
 		
 		Sprite sprite = new Sprite();
         sprite.name = "nyan-cat";
-        sprite.scaleX = sprite.scaleY = 2;
-        sprite.offset = 19 * 2;
+        sprite.scaleX = sprite.scaleY = Constants.ZOOM;
+        sprite.offset = 19 * Constants.ZOOM;
         sprite.layer = Sprite.Layer.ACTORS_2;
         e.addComponent(sprite);
         
@@ -98,6 +98,8 @@ public class EntityFactory {
 	}
 	
 	public static Entity createPole(World world, float x, float y) {
+		float zoom = 1.5f;
+		
 		Entity e = world.createEntity();
 		
 		Position position = new Position();
@@ -106,17 +108,17 @@ public class EntityFactory {
 		e.addComponent(position);
 		
 		Size size = new Size();
-		size.setWidth(81 * 3);
-		size.setHeight(125 * 3);
+		size.setWidth((int)(81 * zoom * Constants.ZOOM));
+		size.setHeight((int)(125 * zoom * Constants.ZOOM));
 		e.addComponent(size);
 		
 		Velocity velocity = new Velocity();
-		velocity.setX(-300);
+		velocity.setX(-150 * Constants.ZOOM);
 		e.addComponent(velocity);
 		
 		Sprite sprite = new Sprite();
         sprite.name = "pole";
-        sprite.scaleX = sprite.scaleY = 3;
+        sprite.scaleX = sprite.scaleY = Constants.ZOOM * zoom;
         sprite.layer = Sprite.Layer.ACTORS_3;
         e.addComponent(sprite);
         
@@ -134,7 +136,7 @@ public class EntityFactory {
 		e.addComponent(position);
 		
 		Velocity velocity = new Velocity();
-		velocity.setX(-300);
+		velocity.setX(-150 * Constants.ZOOM);
 		e.addComponent(velocity);
 		
 		Effect effect = new Effect("pixel2");

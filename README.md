@@ -4,7 +4,6 @@ Author: Daniel "MaTachi" Jonsson
 Tools: Eclipse, GIMP, Aseprite, MyPaint
 Development platform: Ubuntu 12.10
 Libraries: LibGDX, Artemis
-License: ...
 
 ## Texture packer
 

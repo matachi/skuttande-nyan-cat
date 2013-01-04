@@ -3,6 +3,8 @@ package se.danielj.skuttandenyancat.systems;
 import se.danielj.skuttandenyancat.components.Player;
 import se.danielj.skuttandenyancat.components.Position;
 import se.danielj.skuttandenyancat.components.Velocity;
+import se.danielj.skuttandenyancat.misc.Constants;
+import se.danielj.skuttandenyancat.misc.Energy;
 import se.danielj.skuttandenyancat.misc.State;
 
 import com.artemis.Aspect;
@@ -40,7 +42,8 @@ public class PlayerInputSystem extends EntityProcessingSystem implements
 		Velocity velocity = vm.get(e);
 
 		if (jump) {
-			velocity.setY(velocity.getY() + 2000 * world.delta);
+			velocity.setY(velocity.getY() + Constants.JUMP_FORCE * world.delta * Constants.ZOOM);
+			Energy.subtractEnergy(20 * world.delta);
 		}
 	}
 
@@ -49,6 +52,8 @@ public class PlayerInputSystem extends EntityProcessingSystem implements
 		if (keycode == Input.Keys.SPACE) {
 			jump = true;
 			State.setRunning(false);
+		} else if (keycode == Input.Keys.ESCAPE) {
+			Gdx.app.exit();
 		}
 
 		return true;
@@ -72,7 +77,7 @@ public class PlayerInputSystem extends EntityProcessingSystem implements
 	public boolean touchDown(int x, int y, int pointer, int button) {
 		jump = true;
 		State.setRunning(false);
-		return false;
+		return true;
 	}
 
 	@Override

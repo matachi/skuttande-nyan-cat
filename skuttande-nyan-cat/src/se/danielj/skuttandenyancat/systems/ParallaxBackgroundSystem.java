@@ -2,6 +2,7 @@ package se.danielj.skuttandenyancat.systems;
 
 import se.danielj.skuttandenyancat.components.ParallaxBackground;
 import se.danielj.skuttandenyancat.components.Position;
+import se.danielj.skuttandenyancat.misc.Constants;
 
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
@@ -26,8 +27,8 @@ public class ParallaxBackgroundSystem extends IntervalEntityProcessingSystem {
 	protected void process(Entity e) {
 		Position position = pm.get(e);
 
-		if (position.getX() < -2399) {
-			position.setX(position.getX() + 2 * 2399 + 1);
+		if (position.getX() < -1000 * Constants.ZOOM) {
+			position.setX(position.getX() + 2 * 1200 * Constants.ZOOM);
 		}
 	}
 
