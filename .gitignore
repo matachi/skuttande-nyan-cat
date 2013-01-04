@@ -8,3 +8,4 @@ skuttande-nyan-cat-html/war/WEB-INF/classes
 skuttande-nyan-cat-html/war/WEB-INF/deploy
 skuttande-nyan-cat-html/war/assets
 skuttande-nyan-cat-html/war/se.danielj.skuttandenyancat.GwtDefinition
+*.swp
