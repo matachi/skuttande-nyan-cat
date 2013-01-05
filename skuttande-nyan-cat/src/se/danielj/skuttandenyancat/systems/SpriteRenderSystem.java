@@ -25,8 +25,6 @@ import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
@@ -41,7 +39,6 @@ public class SpriteRenderSystem extends EntitySystem {
 	private TextureAtlas textureAtlas;
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
-	private BitmapFont font;
 
 	private Map<String, Renderer> renderers;
 
@@ -101,18 +98,7 @@ public class SpriteRenderSystem extends EntitySystem {
 			}
 		}
 
-//		batch = new SpriteBatch();
-
 		sortedEntities = new ArrayList<Entity>();
-
-//		Texture fontTexture = new Texture(
-//				Gdx.files.internal("fonts/normal_0.png"));
-//		fontTexture.setFilter(TextureFilter.Linear,
-//				TextureFilter.MipMapLinearLinear);
-//		TextureRegion fontRegion = new TextureRegion(fontTexture);
-//		font = new BitmapFont(Gdx.files.internal("fonts/normal.fnt"),
-//				fontRegion, false);
-//		font.setUseIntegerPositions(false);
 	}
 
 	private Renderer createAnimationRenderer(AtlasRegion atlasRegion,
@@ -224,7 +210,7 @@ public class SpriteRenderSystem extends EntitySystem {
 
 			batch.setColor(sprite.r, sprite.g, sprite.b, sprite.a);
 
-			time += Gdx.graphics.getDeltaTime();
+			time += world.getDelta();
 
 			TextureRegion currentFrame = spriteRegion.getKeyFrame(time, true);
 

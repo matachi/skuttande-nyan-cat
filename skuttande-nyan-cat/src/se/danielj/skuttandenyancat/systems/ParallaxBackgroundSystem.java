@@ -14,22 +14,31 @@ public class ParallaxBackgroundSystem extends IntervalEntityProcessingSystem {
 	@Mapper
 	ComponentMapper<Position> pm;
 
-	private float width;
+	/**
+	 * Which X position the background need to be less than before it will be
+	 * moved 2 times it width to the right.
+	 */
+	private float limit;
+
+	/**
+	 * How far the background will be moved to the right, when it has passed the
+	 * left edge of the screen.
+	 */
+	private float pushBack;
 
 	@SuppressWarnings("unchecked")
-	public ParallaxBackgroundSystem(float width) {
+	public ParallaxBackgroundSystem(float backgroundWidth) {
 		super(Aspect.getAspectForAll(ParallaxBackground.class, Position.class),
 				1);
-		this.width = width;
+		limit = -Constants.FRAME_WIDTH / 2 - backgroundWidth / 2 * Constants.ZOOM;
+		pushBack = 2 * backgroundWidth * Constants.ZOOM;
 	}
 
 	@Override
 	protected void process(Entity e) {
 		Position position = pm.get(e);
-
-		if (position.getX() < -1000 * Constants.ZOOM) {
-			position.setX(position.getX() + 2 * 1200 * Constants.ZOOM);
+		if (position.getX() < limit) {
+			position.setX(position.getX() + pushBack);
 		}
 	}
-
 }

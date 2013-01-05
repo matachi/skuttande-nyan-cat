@@ -36,7 +36,6 @@ public class EffectSystem extends EntityProcessingSystem {
 		m.translate(position.getX(), position.getY(), 0);
 		batch.setTransformMatrix(m);
 		ParticleEffect particleEffect = em.get(e).getParticleEffect();
-		//particleEffect.setPosition(position.getX(), position.getY());
 	    particleEffect.draw(batch, world.getDelta());
 	    if (particleEffect.isComplete()) {
 	    	world.deleteEntity(e);

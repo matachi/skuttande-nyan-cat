@@ -4,7 +4,7 @@ import com.artemis.Component;
 
 public class Sprite extends Component {
 	public enum Layer {
-		DEFAULT, BACKGROUND, ACTORS_1, ACTORS_2, ACTORS_3, PARTICLES;
+		DEFAULT, BACKGROUND_1, BACKGROUND_2, ACTORS_1, ACTORS_2, ACTORS_3, PARTICLES;
 
 		public int getLayerId() {
 			return ordinal();

@@ -21,7 +21,7 @@ public class CameraSystem extends VoidEntitySystem {
 	protected void processSystem() {
 //				camera.translate(0, zoom * 1000 *world.delta);
 		if (State.isRunning()) {
-			camera.zoom -= zoom * 2 * world.delta;
+			camera.zoom -= zoom * 3 * world.delta;
 //			System.out.println(camera.position.y);
 			if (moveUp) {
 				camera.translate(0, zoom * 1000 * world.delta);

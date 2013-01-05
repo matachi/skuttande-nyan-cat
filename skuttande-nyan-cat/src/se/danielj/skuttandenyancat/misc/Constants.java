@@ -11,6 +11,7 @@ public class Constants {
 	public class Groups {
 		public static final String CAT = "c";
 		public static final String POLE = "p";
+		public static final String STAR = "s";
 	};
 
 }

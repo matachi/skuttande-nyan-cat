@@ -1,7 +1,6 @@
 package se.danielj.skuttandenyancat.systems;
 
 import se.danielj.skuttandenyancat.components.Player;
-import se.danielj.skuttandenyancat.components.Position;
 import se.danielj.skuttandenyancat.components.Velocity;
 import se.danielj.skuttandenyancat.misc.Constants;
 import se.danielj.skuttandenyancat.misc.Energy;
@@ -19,16 +18,17 @@ import com.badlogic.gdx.InputProcessor;
 public class PlayerInputSystem extends EntityProcessingSystem implements
 		InputProcessor {
 	@Mapper
-	ComponentMapper<Position> pm;
-	@Mapper
 	ComponentMapper<Velocity> vm;
 
+	/**
+	 * Store locally if the jump button has been triggered. This variable is
+	 * used later when the system is processed.
+	 */
 	private boolean jump;
 	
 	@SuppressWarnings("unchecked")
 	public PlayerInputSystem() {
-		super(Aspect.getAspectForAll(Position.class, Velocity.class,
-				Player.class));
+		super(Aspect.getAspectForAll(Velocity.class, Player.class));
 	}
 
 	@Override
@@ -38,12 +38,12 @@ public class PlayerInputSystem extends EntityProcessingSystem implements
 
 	@Override
 	protected void process(Entity e) {
-//		Position position = pm.get(e);
 		Velocity velocity = vm.get(e);
-
 		if (jump) {
-			velocity.setY(velocity.getY() + Constants.JUMP_FORCE * world.delta * Constants.ZOOM);
-			Energy.subtractEnergy(20 * world.delta);
+			if (Energy.hasEnergy()) {
+				velocity.setY(velocity.getY() + Constants.JUMP_FORCE * world.delta * Constants.ZOOM);
+				Energy.subtractEnergy(20 * world.delta);
+			}
 		}
 	}
 

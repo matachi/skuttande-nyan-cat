@@ -32,7 +32,7 @@ public class EntityFactory {
 		Sprite sprite = new Sprite();
         sprite.name = "background";
         sprite.scaleX = sprite.scaleY = Constants.ZOOM * 2;
-        sprite.layer = Sprite.Layer.BACKGROUND;
+        sprite.layer = Sprite.Layer.BACKGROUND_1;
         e.addComponent(sprite);
 
 		return e;
@@ -55,7 +55,7 @@ public class EntityFactory {
 		Sprite sprite = new Sprite();
         sprite.name = "background-city";
         sprite.scaleX = sprite.scaleY = Constants.ZOOM * 2;
-        sprite.layer = Sprite.Layer.ACTORS_1;
+        sprite.layer = Sprite.Layer.BACKGROUND_2;
         e.addComponent(sprite);
 
 		return e;
@@ -86,7 +86,7 @@ public class EntityFactory {
         sprite.name = "nyan-cat";
         sprite.scaleX = sprite.scaleY = Constants.ZOOM;
         sprite.offset = 19 * Constants.ZOOM;
-        sprite.layer = Sprite.Layer.ACTORS_2;
+        sprite.layer = Sprite.Layer.ACTORS_1;
         e.addComponent(sprite);
         
         Player player = new Player();
@@ -98,7 +98,7 @@ public class EntityFactory {
 	}
 	
 	public static Entity createPole(World world, float x, float y) {
-		float zoom = 1.5f;
+		float zoom = 1f;
 		
 		Entity e = world.createEntity();
 		
@@ -108,8 +108,8 @@ public class EntityFactory {
 		e.addComponent(position);
 		
 		Size size = new Size();
-		size.setWidth((int)(81 * zoom * Constants.ZOOM));
-		size.setHeight((int)(125 * zoom * Constants.ZOOM));
+		size.setWidth((int)(123 * zoom * Constants.ZOOM));
+		size.setHeight((int)(250 * zoom * Constants.ZOOM));
 		e.addComponent(size);
 		
 		Velocity velocity = new Velocity();
@@ -119,10 +119,38 @@ public class EntityFactory {
 		Sprite sprite = new Sprite();
         sprite.name = "pole";
         sprite.scaleX = sprite.scaleY = Constants.ZOOM * zoom;
-        sprite.layer = Sprite.Layer.ACTORS_3;
+        sprite.layer = Sprite.Layer.ACTORS_2;
         e.addComponent(sprite);
         
         world.getManager(GroupManager.class).add(e, Constants.Groups.POLE);
+        
+		return e;
+	}
+	
+	public static Entity createStar(World world, float x, float y) {
+		Entity e = world.createEntity();
+		
+		Position position = new Position();
+		position.setX(x);
+		position.setY(y);
+		e.addComponent(position);
+		
+		Size size = new Size();
+		size.setWidth((int)(16 * Constants.ZOOM));
+		size.setHeight((int)(16 * Constants.ZOOM));
+		e.addComponent(size);
+		
+		Velocity velocity = new Velocity();
+		velocity.setX(-150 * Constants.ZOOM);
+		e.addComponent(velocity);
+		
+		Sprite sprite = new Sprite();
+        sprite.name = "star";
+        sprite.scaleX = sprite.scaleY = Constants.ZOOM;
+        sprite.layer = Sprite.Layer.ACTORS_3;
+        e.addComponent(sprite);
+        
+        world.getManager(GroupManager.class).add(e, Constants.Groups.STAR);
         
 		return e;
 	}
@@ -141,7 +169,24 @@ public class EntityFactory {
 		
 		Effect effect = new Effect("pixel2");
 		e.addComponent(effect);
-		System.out.println("AJAJAJAJ");
+        
+		return e;
+	}
+	
+	public static Entity createEffect2(World world, float x, float y) {
+		Entity e = world.createEntity();
+		
+		Position position = new Position();
+		position.setX(x);
+		position.setY(y);
+		e.addComponent(position);
+		
+		Velocity velocity = new Velocity();
+		velocity.setX(-150 * Constants.ZOOM);
+		e.addComponent(velocity);
+		
+		Effect effect = new Effect("lines");
+		e.addComponent(effect);
         
 		return e;
 	}

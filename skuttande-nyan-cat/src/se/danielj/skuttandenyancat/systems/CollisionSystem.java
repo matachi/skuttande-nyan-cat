@@ -6,6 +6,7 @@ import se.danielj.skuttandenyancat.components.Position;
 import se.danielj.skuttandenyancat.components.Size;
 import se.danielj.skuttandenyancat.components.Velocity;
 import se.danielj.skuttandenyancat.misc.Constants;
+import se.danielj.skuttandenyancat.misc.Energy;
 import se.danielj.skuttandenyancat.misc.Score;
 import se.danielj.skuttandenyancat.misc.State;
 
@@ -29,7 +30,7 @@ public class CollisionSystem extends EntitySystem {
 	private Bag<CollisionPair> collisionPairs;
 
 	private Entity cat;
-	
+
 	private Position catPos;
 
 	@SuppressWarnings("unchecked")
@@ -39,7 +40,29 @@ public class CollisionSystem extends EntitySystem {
 
 	@Override
 	public void initialize() {
+		ImmutableBag<Entity> e = world.getManager(GroupManager.class)
+				.getEntities(Constants.Groups.CAT);
+		if (!e.isEmpty()) {
+			cat = e.get(0);
+			cat = world.getManager(GroupManager.class)
+					.getEntities(Constants.Groups.CAT).get(0);
+			catPos = pm.get(cat);
+		}
+		
 		collisionPairs = new Bag<CollisionPair>();
+
+		collisionPairs.add(new CollisionPair(Constants.Groups.STAR,
+				new CollisionHandler() {
+					@Override
+					public void handleCollision(Entity cat, Entity star) {
+						Position pp = pm.get(star);
+						world.deleteEntity(star);
+						EntityFactory
+								.createEffect2(world, pp.getX(), pp.getY())
+								.addToWorld();
+						Energy.addEnergy(40);
+					}
+				}));
 
 		collisionPairs.add(new CollisionPair(Constants.Groups.POLE,
 				new CollisionHandler() {
@@ -53,7 +76,8 @@ public class CollisionSystem extends EntitySystem {
 						Position pp = pm.get(pole);
 						Size sp = sm.get(pole);
 
-						if (prevY - sc.getHeight() / 2 < pp.getY() + sp.getHeight() / 2) {
+						if (prevY - sc.getHeight() / 2 < pp.getY()
+								+ sp.getHeight() / 2) {
 							return;
 						}
 						vc.setY(0);
@@ -73,7 +97,7 @@ public class CollisionSystem extends EntitySystem {
 
 	private boolean running;
 
-	private float prevX = 0;
+//	private float prevX = 0;
 	private float prevY = 0;
 
 	@Override
@@ -86,7 +110,7 @@ public class CollisionSystem extends EntitySystem {
 			State.setRunning(false);
 			Score.addScoreToTotal();
 		}
-		prevX = catPos.getX();
+//		prevX = catPos.getX();
 		prevY = catPos.getY();
 	}
 

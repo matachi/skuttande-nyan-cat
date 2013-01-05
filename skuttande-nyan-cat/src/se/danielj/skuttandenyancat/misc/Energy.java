@@ -2,7 +2,11 @@ package se.danielj.skuttandenyancat.misc;
 
 public class Energy {
 
-	private static float energy = 100;
+	private static float energy;
+	
+	public static void init() {
+		energy = 100;
+	}
 	
 	public static void setEnergy(float energy) {
 		if (energy < 0) {
@@ -24,5 +28,9 @@ public class Energy {
 	
 	public static void subtractEnergy(float energy) {
 		setEnergy(getEnergy() - energy);
+	}
+	
+	public static boolean hasEnergy() {
+		return getEnergy() > 0;
 	}
 }

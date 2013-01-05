@@ -16,5 +16,9 @@
 {
     "guid":         "pole",
     "animated":     "false"
+},
+{
+    "guid":         "star",
+    "animated":     "false"
 }
 ]
