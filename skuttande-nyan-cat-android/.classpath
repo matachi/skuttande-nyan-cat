@@ -2,10 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="src" exported="true" path="/skuttande-nyan-cat" combineaccessrules="false"/>
-	<classpathentry kind="output" path="bin/classes"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/skuttande-nyan-cat"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" exported="true" path="/skuttande-nyan-cat/libs/gdx.jar" sourcepath="/skuttande-nyan-cat/libs/gdx-sources.jar"/>
-	<classpathentry kind="lib" exported="true" path="libs/gdx-backend-android.jar" sourcepath="libs/gdx-backend-android-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/skuttande-nyan-cat/libs/gdx.jar" sourcepath="/skuttande-nyan-cat/libs/gdx-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-android.jar" sourcepath="libs/gdx-backend-android-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/skuttande-nyan-cat/libs/artemis.jar"/>
+	<classpathentry exported="true" kind="lib" path="/skuttande-nyan-cat/libs/json-simple-1.1.1.jar"/>
+	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
