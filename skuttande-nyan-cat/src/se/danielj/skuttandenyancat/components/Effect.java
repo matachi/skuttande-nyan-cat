@@ -17,4 +17,8 @@ public class Effect extends Component {
 	public ParticleEffect getParticleEffect() {
 		return particleEffect;
 	}
+	
+	public void dispose() {
+		particleEffect.dispose();
+	}
 }

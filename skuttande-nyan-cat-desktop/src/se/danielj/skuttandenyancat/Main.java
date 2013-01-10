@@ -8,9 +8,9 @@ public class Main {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "skuttande-nyan-cat";
 		cfg.useGL20 = true;
-		cfg.width = 640;
-		cfg.height = 360;
+		cfg.width = 640 * 2;
+		cfg.height = 360 * 2;
 		
-		new LwjglApplication(new Game(), cfg);
+		new LwjglApplication(new AppController(), cfg);
 	}
 }

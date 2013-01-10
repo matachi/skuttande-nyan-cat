@@ -2,8 +2,10 @@ package se.danielj.skuttandenyancat.systems;
 
 import se.danielj.skuttandenyancat.misc.Constants;
 import se.danielj.skuttandenyancat.misc.Energy;
+import se.danielj.skuttandenyancat.misc.FontManager;
 import se.danielj.skuttandenyancat.misc.GameController;
 import se.danielj.skuttandenyancat.misc.Score;
+import se.danielj.skuttandenyancat.misc.SpriteManager;
 
 import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.Gdx;
@@ -13,7 +15,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -32,6 +33,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class HudRenderSystem extends VoidEntitySystem {
 
+	private Texture fontTexture;
+	
 	/**
 	 * Font for the total score
 	 */
@@ -76,45 +79,32 @@ public class HudRenderSystem extends VoidEntitySystem {
 	
 	private MoveToAction animationAction;
 
-	public HudRenderSystem(GameController gameController) {
+	public HudRenderSystem(GameController gameController, InputMultiplexer inputMultiplexer) {
 		this.gameController = gameController;
+        stage = new Stage();
+        inputMultiplexer.addProcessor(0, stage);
 	}
 
 	@Override
 	protected void initialize() {
-		Texture fontTexture = new Texture(
+		fontTexture = new Texture(
 				Gdx.files.internal("fonts/ConsolaMono-Bold.png"));
 		fontTexture.setFilter(TextureFilter.Linear,
 				TextureFilter.MipMapLinearLinear);
 		TextureRegion fontRegion = new TextureRegion(fontTexture);
-		font = new BitmapFont(Gdx.files.internal("fonts/ConsolaMono-Bold.fnt"),
-				fontRegion, false);
+//		font = new BitmapFont(Gdx.files.internal("fonts/ConsolaMono-Bold.fnt"),
+//				fontRegion, false);
+		font = FontManager.getFontHalf();
 		scoreFont = new BitmapFont(Gdx.files.internal("fonts/ConsolaMono-Bold.fnt"),
 				fontRegion, false);
 		
-        TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("sprites/sprites.atlas"), Gdx.files.internal("sprites"));
-        for (AtlasRegion r : textureAtlas.getRegions()) {
-        	if (r.name.equals("pixel")) {
-	            pixel = r;
-        	} else if (r.name.equals("pause")) {
-        		pauseButtonAtlas = r;
-        	} else if (r.name.equals("pause-pressed")) {
-        		pauseButtonPressedAtlas = r;
-        	} else if (r.name.equals("pause-menu-button")) {
-        		menuButtonAtlas = r;
-        	} else if (r.name.equals("pause-menu-button-pressed")) {
-        		menuButtonPressedAtlas = r;
-        	}
-        }
+		pixel = SpriteManager.getSprite("pixel");
+		pauseButtonAtlas = SpriteManager.getSprite("pause");
+		pauseButtonPressedAtlas = SpriteManager.getSprite("pause-pressed");
+		menuButtonAtlas = SpriteManager.getSprite("pause-menu-button");
+		menuButtonPressedAtlas = SpriteManager.getSprite("pause-menu-button-pressed");
         
-        stage = new Stage();
         stage.setViewport(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT, true);
-        
-        // TODO: Fix this .......
-        InputMultiplexer i = new InputMultiplexer();
-        i.addProcessor(stage);
-        i.addProcessor(Gdx.input.getInputProcessor());
-        Gdx.input.setInputProcessor(i);
         
         TextButtonStyle style = new TextButtonStyle();
         style.up = new TextureRegionDrawable(pauseButtonAtlas);
@@ -138,7 +128,7 @@ public class HudRenderSystem extends VoidEntitySystem {
         totalScoreGroup = new Group();
         font.setScale(0.5f);
         totalScoreLabelStyle.font = font;
-        totalScore = new Label("SCORE: 0", totalScoreLabelStyle);
+        totalScore = new Label("Score: 0", totalScoreLabelStyle);
         totalScore.setScale(0.1f);
         totalScore.setPosition(totalScoreX, totalScoreY);
         totalScoreGroup.addActor(totalScore);
@@ -172,7 +162,7 @@ public class HudRenderSystem extends VoidEntitySystem {
 	@Override
 	protected void processSystem() {
 		// Total score
-		totalScore.setText("SCORE: " + Score.getTotalScore());
+		totalScore.setText("Score: " + Score.getTotalScore());
 		
 		// Score
 		if (Score.getScore() > 0) {
@@ -273,7 +263,7 @@ public class HudRenderSystem extends VoidEntitySystem {
 			this.addActor(new MenuButton("Resume", 1, new MenuButtonListener() {
 				@Override
 				protected void action() {
-					gameController.resume();
+					gameController.continueGame();
 				}
 			}));
 			this.addActor(new MenuButton("Restart", 2, new MenuButtonListener() {
@@ -363,5 +353,11 @@ public class HudRenderSystem extends VoidEntitySystem {
 	public void showGameOverMenu(boolean visible) {
 		gameOverMenu.setVisible(visible);
 		pauseButton.setVisible(!visible);
+	}
+	
+	public void dispose() {
+		fontTexture.dispose();
+		scoreFont.dispose();
+		stage.dispose();
 	}
 }

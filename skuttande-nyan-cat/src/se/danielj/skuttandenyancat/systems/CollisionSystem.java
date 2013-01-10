@@ -8,6 +8,7 @@ import se.danielj.skuttandenyancat.components.Velocity;
 import se.danielj.skuttandenyancat.misc.Constants;
 import se.danielj.skuttandenyancat.misc.Energy;
 import se.danielj.skuttandenyancat.misc.Score;
+import se.danielj.skuttandenyancat.misc.SoundEffectsManager;
 import se.danielj.skuttandenyancat.misc.State;
 
 import com.artemis.Aspect;
@@ -61,6 +62,7 @@ public class CollisionSystem extends EntitySystem {
 								.createEffect2(world, pp.getX(), pp.getY())
 								.addToWorld();
 						Energy.addEnergy(40);
+						SoundEffectsManager.star();
 					}
 				}));
 
@@ -88,6 +90,7 @@ public class CollisionSystem extends EntitySystem {
 									pc.getY() - sc.getHeight() / 2)
 									.addToWorld();
 							State.setRunning(true);
+							SoundEffectsManager.landingSound();
 						}
 						running = true;
 						Score.addScore(1000 * world.getDelta());

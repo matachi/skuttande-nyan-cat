@@ -15,6 +15,7 @@ import org.json.simple.parser.ParseException;
 
 import se.danielj.skuttandenyancat.components.Position;
 import se.danielj.skuttandenyancat.components.Sprite;
+import se.danielj.skuttandenyancat.misc.SpriteManager;
 
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
@@ -26,7 +27,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -36,7 +36,6 @@ public class SpriteRenderSystem extends EntitySystem {
 	@Mapper
 	ComponentMapper<Sprite> sm;
 
-	private TextureAtlas textureAtlas;
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
 
@@ -67,9 +66,6 @@ public class SpriteRenderSystem extends EntitySystem {
 
 	@Override
 	protected void initialize() {
-		textureAtlas = new TextureAtlas(
-				Gdx.files.internal("sprites/sprites.atlas"),
-				Gdx.files.internal("sprites"));
 		renderers = new HashMap<String, Renderer>();
 
 		JSONParser parser = new JSONParser();
@@ -92,9 +88,9 @@ public class SpriteRenderSystem extends EntitySystem {
 			if (animated) {
 				Integer tiles = toInt(s.get("tiles"));
 				Float delay = toFloat(s.get("delay"));
-				renderers.put(guid, createAnimationRenderer(textureAtlas.findRegion(guid), tiles, delay, false));
+				renderers.put(guid, createAnimationRenderer(SpriteManager.getSprite(guid), tiles, delay, false));
 			} else {
-				renderers.put(guid, new SpriteRenderer(textureAtlas.findRegion(guid)));
+				renderers.put(guid, new SpriteRenderer(SpriteManager.getSprite(guid)));
 			}
 		}
 

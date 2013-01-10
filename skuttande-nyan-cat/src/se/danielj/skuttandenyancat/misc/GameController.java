@@ -9,4 +9,8 @@ public interface GameController extends ApplicationListener {
 	public void exit();
 	
 	public void restart();
+	
+	public void continueGame();
+	
+	public void back();
 }

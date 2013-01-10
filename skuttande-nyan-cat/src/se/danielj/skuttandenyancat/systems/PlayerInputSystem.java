@@ -4,6 +4,7 @@ import se.danielj.skuttandenyancat.components.Player;
 import se.danielj.skuttandenyancat.components.Velocity;
 import se.danielj.skuttandenyancat.misc.Constants;
 import se.danielj.skuttandenyancat.misc.Energy;
+import se.danielj.skuttandenyancat.misc.GameController;
 import se.danielj.skuttandenyancat.misc.State;
 
 import com.artemis.Aspect;
@@ -11,14 +12,16 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.EntityProcessingSystem;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 
 public class PlayerInputSystem extends EntityProcessingSystem implements
 		InputProcessor {
 	@Mapper
 	ComponentMapper<Velocity> vm;
+	
+	private GameController gameController;
 
 	/**
 	 * Store locally if the jump button has been triggered. This variable is
@@ -27,13 +30,14 @@ public class PlayerInputSystem extends EntityProcessingSystem implements
 	private boolean jump;
 	
 	@SuppressWarnings("unchecked")
-	public PlayerInputSystem() {
+	public PlayerInputSystem(InputMultiplexer inputMultiplexer, GameController gameController) {
 		super(Aspect.getAspectForAll(Velocity.class, Player.class));
+		inputMultiplexer.addProcessor(this);
+		this.gameController = gameController;
 	}
 
 	@Override
 	protected void initialize() {
-		Gdx.input.setInputProcessor(this);
 	}
 
 	@Override
@@ -52,8 +56,10 @@ public class PlayerInputSystem extends EntityProcessingSystem implements
 		if (keycode == Input.Keys.SPACE) {
 			jump = true;
 			State.setRunning(false);
-		} else if (keycode == Input.Keys.ESCAPE) {
-			Gdx.app.exit();
+//		} else if (keycode == Input.Keys.ESCAPE) {
+//			Gdx.app.exit();
+		} else if (keycode == Input.Keys.BACK) {
+			gameController.back();
 		}
 
 		return true;

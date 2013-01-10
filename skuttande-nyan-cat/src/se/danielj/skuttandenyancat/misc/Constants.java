@@ -12,6 +12,7 @@ public class Constants {
 		public static final String CAT = "c";
 		public static final String POLE = "p";
 		public static final String STAR = "s";
+		public static final String EFFECT = "e";
 	};
 
 }

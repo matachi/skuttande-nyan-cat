@@ -31,7 +31,7 @@ public class ParallaxBackgroundSystem extends IntervalEntityProcessingSystem {
 		super(Aspect.getAspectForAll(ParallaxBackground.class, Position.class),
 				1);
 		limit = -Constants.FRAME_WIDTH / 2 - backgroundWidth / 2 * Constants.ZOOM;
-		pushBack = 2 * backgroundWidth * Constants.ZOOM;
+		pushBack = 2 * backgroundWidth * Constants.ZOOM - 10;
 	}
 
 	@Override

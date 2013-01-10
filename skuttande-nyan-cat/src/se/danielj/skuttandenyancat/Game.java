@@ -1,5 +1,6 @@
 package se.danielj.skuttandenyancat;
 
+import se.danielj.skuttandenyancat.Controller.Scene;
 import se.danielj.skuttandenyancat.misc.Constants;
 import se.danielj.skuttandenyancat.misc.Energy;
 import se.danielj.skuttandenyancat.misc.GameController;
@@ -13,6 +14,7 @@ import se.danielj.skuttandenyancat.systems.GameOverSystem;
 import se.danielj.skuttandenyancat.systems.GravitySystem;
 import se.danielj.skuttandenyancat.systems.HudRenderSystem;
 import se.danielj.skuttandenyancat.systems.MovementSystem;
+import se.danielj.skuttandenyancat.systems.MusicVolumeSystem;
 import se.danielj.skuttandenyancat.systems.ParallaxBackgroundSystem;
 import se.danielj.skuttandenyancat.systems.PlayerInputSystem;
 import se.danielj.skuttandenyancat.systems.PoleSpawnerSystem;
@@ -22,6 +24,7 @@ import se.danielj.skuttandenyancat.systems.StarSpawnerSystem;
 import com.artemis.World;
 import com.artemis.managers.GroupManager;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -34,13 +37,30 @@ public class Game implements GameController {
 	private SpriteRenderSystem spriteRenderSystem;
 	private HudRenderSystem hudRenderSystem;
 	private EffectSystem particleEffectSystem;
+	private MusicVolumeSystem musicVolumeSystem;
 	
 	private RunningState currentState;
 	private RunningState drawState;
 	private RunningState pauseState;
 	
+	private Controller controller;
+	
+	private InputMultiplexer inputMultiplexer;
+	
+	private boolean running;
+	
+	private SpriteBatch batch;
+	
+	public Game(Controller controller, InputMultiplexer inputMultiplexer) {
+		this.controller = controller;
+		this.inputMultiplexer = inputMultiplexer;
+		running = false;
+	}
+	
 	@Override
 	public void create() {		
+		inputMultiplexer.clear();
+		
 		camera = new OrthographicCamera(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
 		
 		Energy.init();
@@ -50,7 +70,7 @@ public class Game implements GameController {
 		world = new World();
 		world.setManager(new GroupManager());
 		world.setSystem(new ParallaxBackgroundSystem(1200));
-		world.setSystem(new PlayerInputSystem());
+		world.setSystem(new PlayerInputSystem(inputMultiplexer, this));
 		world.setSystem(new GravitySystem());
 		world.setSystem(new MovementSystem());
 		world.setSystem(new CollisionSystem());
@@ -60,19 +80,21 @@ public class Game implements GameController {
 		world.setSystem(new CameraSystem(camera));
 		world.setSystem(new GameOverSystem(1, this));
 		
-		SpriteBatch batch = new SpriteBatch();
+		batch = new SpriteBatch();
 		batch.setProjectionMatrix(camera.combined);
 		
 		particleEffectSystem = world.setSystem(new EffectSystem(batch), true);
 		spriteRenderSystem = world.setSystem(new SpriteRenderSystem(camera, batch), true);
-		hudRenderSystem = world.setSystem(new HudRenderSystem(this), true);
+		hudRenderSystem = world.setSystem(new HudRenderSystem(this, inputMultiplexer), true);
+		musicVolumeSystem = world.setSystem(new MusicVolumeSystem(), true);
+		musicVolumeSystem.play();
 		
 		world.initialize();
 		
 		EntityFactory.createBackground(world, 0, 0).addToWorld();
-		EntityFactory.createBackground(world, 1200 * Constants.ZOOM, 0).addToWorld();
+		EntityFactory.createBackground(world, 1200 * Constants.ZOOM - 5, 0).addToWorld();
 		EntityFactory.createBackground2(world, 0, -100 * Constants.ZOOM).addToWorld();
-		EntityFactory.createBackground2(world, 1200 * Constants.ZOOM, -100 * Constants.ZOOM).addToWorld();
+		EntityFactory.createBackground2(world, 1200 * Constants.ZOOM - 5, -100 * Constants.ZOOM).addToWorld();
 		EntityFactory.createNyanCat(world, -50 * Constants.ZOOM, 100 * Constants.ZOOM).addToWorld();
 		EntityFactory.createPole(world, 0, -100 * Constants.ZOOM).addToWorld();
 		EntityFactory.createPole(world, 400 * Constants.ZOOM, -100 * Constants.ZOOM).addToWorld();
@@ -80,6 +102,8 @@ public class Game implements GameController {
 		drawState = new Draw();
 		pauseState = new Pause();
 		currentState = drawState;
+		
+		running = true;
 	}
 
 	@Override
@@ -95,32 +119,65 @@ public class Game implements GameController {
 	public void pause() {
 		currentState = pauseState;
 		hudRenderSystem.showPauseMenu(true);
+		musicVolumeSystem.stop();
 	}
 
 	@Override
 	public void resume() {
-		currentState = drawState;
-		hudRenderSystem.showPauseMenu(false);
 	}
 
 	@Override
 	public void dispose() {
+		particleEffectSystem.dispose();
+		hudRenderSystem.dispose();
+		batch.dispose();
+	}
+
+	@Override
+	public void continueGame() {
+		currentState = drawState;
+		hudRenderSystem.showPauseMenu(false);
+		musicVolumeSystem.play();
 	}
 	
 	@Override
 	public void gameOver() {
 		currentState = pauseState;
 		hudRenderSystem.showGameOverMenu(true);
+		running = false;
+		musicVolumeSystem.stop();
 	}
 
 	@Override
 	public void exit() {
-		Gdx.app.exit();
+		musicVolumeSystem.stopCompletely();
+		controller.setScene(Scene.MAIN_MENU);
+		particleEffectSystem.dispose();
+	}
+	
+	@Override
+	public void back() {
+		if (running) {
+			pause();
+			musicVolumeSystem.stopCompletely();
+			controller.setScene(Scene.MAIN_MENU);
+		} else {
+			exit();
+		}
 	}
 
 	@Override
 	public void restart() {
+		dispose();
 		create();
+	}
+	
+	public boolean isRunning() {
+		return running;
+	}
+	
+	public void reset() {
+		restart();
 	}
 	
 	private interface RunningState {
@@ -141,6 +198,7 @@ public class Game implements GameController {
 			spriteRenderSystem.process();
 			particleEffectSystem.process();
 			hudRenderSystem.process();
+			musicVolumeSystem.process();
 		}
 	}
 	
@@ -150,7 +208,8 @@ public class Game implements GameController {
 			spriteRenderSystem.process();
 			particleEffectSystem.process();
 			hudRenderSystem.process();
+			world.setDelta(Gdx.graphics.getDeltaTime());
+			musicVolumeSystem.process();
 		}
 	}
-
 }

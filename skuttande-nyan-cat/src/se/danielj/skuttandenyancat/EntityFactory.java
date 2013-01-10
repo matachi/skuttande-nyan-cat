@@ -169,6 +169,8 @@ public class EntityFactory {
 		
 		Effect effect = new Effect("pixel2");
 		e.addComponent(effect);
+		
+        world.getManager(GroupManager.class).add(e, Constants.Groups.EFFECT);
         
 		return e;
 	}
@@ -187,6 +189,8 @@ public class EntityFactory {
 		
 		Effect effect = new Effect("lines");
 		e.addComponent(effect);
+		
+        world.getManager(GroupManager.class).add(e, Constants.Groups.EFFECT);
         
 		return e;
 	}
