@@ -82,7 +82,7 @@ public class Credits implements ApplicationListener, InputProcessor {
         LabelStyle labelStyle = new LabelStyle();
         font.setScale(0.5f);
 		labelStyle.font = font;
-		String textString = "Skuttande Nyan Cat was made during January 2012 for One Game A Month\n\n\n\n\nProgramming & graphics: Daniel \"MaTachi\" Jonsson, www.danielj.se\n\nJava libraries: LibGDX & Artemis\nFonts: Consola Mono & Intuitive\nBackground music: Nyanyanyanyanyanyanya! by daniwellP\nSoftware used: Eclipse, GIMP, Aseprite & MyPaint on Ubuntu\nSound effects editor used: as3sfxr";
+		String textString = "Skuttande Nyan Cat was made during January 2013 for One Game A Month\n\n\n\n\nProgramming & graphics: Daniel \"MaTachi\" Jonsson, www.danielj.se\n\nJava libraries: LibGDX & Artemis\nFonts: Consola Mono & Intuitive\nBackground music: Nyanyanyanyanyanyanya! by daniwellP\nSoftware used: Eclipse, GIMP, Aseprite & MyPaint on Ubuntu\nSound effects editor used: as3sfxr";
 		text = new Label(textString, labelStyle);
         text.setPosition(60, 180);
         
