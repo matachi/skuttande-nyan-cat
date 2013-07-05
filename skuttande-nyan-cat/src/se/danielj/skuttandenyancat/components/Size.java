@@ -2,6 +2,12 @@ package se.danielj.skuttandenyancat.components;
 
 import com.artemis.Component;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
+ *
+ */
 public class Size extends Component {
 	private int width;
 	private int height;

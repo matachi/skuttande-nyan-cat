@@ -16,6 +16,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
+ *
+ */
 public class PlayerInputSystem extends EntityProcessingSystem implements
 		InputProcessor {
 	@Mapper

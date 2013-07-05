@@ -4,6 +4,12 @@ import se.danielj.skuttandenyancat.misc.MusicManager;
 
 import com.artemis.systems.VoidEntitySystem;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
+ *
+ */
 public class MusicVolumeSystem extends VoidEntitySystem {
 
 	private float volume;

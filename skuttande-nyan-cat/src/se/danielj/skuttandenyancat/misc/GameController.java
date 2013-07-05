@@ -2,6 +2,12 @@ package se.danielj.skuttandenyancat.misc;
 
 import com.badlogic.gdx.ApplicationListener;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
+ *
+ */
 public interface GameController extends ApplicationListener {
 
 	public void gameOver();

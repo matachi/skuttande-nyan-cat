@@ -1,5 +1,11 @@
 package se.danielj.skuttandenyancat.misc;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
+ *
+ */
 public class Constants {
 
 	public static final int FRAME_WIDTH = 640;

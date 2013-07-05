@@ -20,6 +20,12 @@ import com.artemis.managers.GroupManager;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
+ *
+ */
 public class CollisionSystem extends EntitySystem {
 	@Mapper
 	ComponentMapper<Position> pm;

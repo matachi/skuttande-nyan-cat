@@ -18,7 +18,8 @@ import com.artemis.utils.ImmutableBag;
  * This system checks if the cat is outside the screen and if the cat/player has
  * died.
  * 
- * @author matachi
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
  * 
  */
 public class GameOverSystem extends IntervalEntitySystem {

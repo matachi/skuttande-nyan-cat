@@ -4,6 +4,12 @@ import com.artemis.Component;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
+ *
+ */
 public class Effect extends Component {
 	private ParticleEffect particleEffect;
 	

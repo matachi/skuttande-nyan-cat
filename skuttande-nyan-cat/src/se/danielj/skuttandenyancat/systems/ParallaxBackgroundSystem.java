@@ -10,6 +10,12 @@ import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.IntervalEntityProcessingSystem;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
+ *
+ */
 public class ParallaxBackgroundSystem extends IntervalEntityProcessingSystem {
 	@Mapper
 	ComponentMapper<Position> pm;

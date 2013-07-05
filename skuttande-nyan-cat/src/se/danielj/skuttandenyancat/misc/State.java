@@ -3,7 +3,8 @@ package se.danielj.skuttandenyancat.misc;
 /**
  * This class is used to keep track of if the cat is running or not.
  * 
- * @author matachi
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
  * 
  */
 public class State {

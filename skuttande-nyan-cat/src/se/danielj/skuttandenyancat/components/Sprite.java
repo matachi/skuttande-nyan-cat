@@ -2,6 +2,12 @@ package se.danielj.skuttandenyancat.components;
 
 import com.artemis.Component;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
+ *
+ */
 public class Sprite extends Component {
 	public enum Layer {
 		DEFAULT, BACKGROUND_1, BACKGROUND_2, ACTORS_1, ACTORS_2, ACTORS_3, PARTICLES;

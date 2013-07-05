@@ -1,5 +1,11 @@
 package se.danielj.skuttandenyancat.misc;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
+ *
+ */
 public class Energy {
 
 	private static float energy;

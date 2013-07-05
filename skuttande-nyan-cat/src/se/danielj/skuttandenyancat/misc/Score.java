@@ -5,7 +5,8 @@ package se.danielj.skuttandenyancat.misc;
  * when you run on a pole. The "temp" score is added to the total score when you
  * jump from the pole.
  * 
- * @author matachi
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
  * 
  */
 public class Score {

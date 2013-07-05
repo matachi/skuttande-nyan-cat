@@ -14,6 +14,12 @@ import com.artemis.Entity;
 import com.artemis.World;
 import com.artemis.managers.GroupManager;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
+ *
+ */
 public class EntityFactory {
 	public static Entity createBackground(World world, float x, float y) {
 		Entity e = world.createEntity();

@@ -8,6 +8,12 @@ import com.artemis.Entity;
 import com.artemis.systems.IntervalEntitySystem;
 import com.artemis.utils.ImmutableBag;
 
+/**
+ * 
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
+ *
+ */
 public class PoleSpawnerSystem extends IntervalEntitySystem {
 
 	public PoleSpawnerSystem(float interval) {

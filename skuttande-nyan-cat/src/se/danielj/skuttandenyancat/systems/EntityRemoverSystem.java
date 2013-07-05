@@ -16,7 +16,8 @@ import com.artemis.utils.ImmutableBag;
  * This system removes poles and stars that have moved passed the left edge of
  * the screen and aren't visible anymore.
  * 
- * @author matachi
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
  * 
  */
 public class EntityRemoverSystem extends IntervalEntitySystem {

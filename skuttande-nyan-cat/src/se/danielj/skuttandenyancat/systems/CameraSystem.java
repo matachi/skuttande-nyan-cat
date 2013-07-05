@@ -4,6 +4,13 @@ import se.danielj.skuttandenyancat.misc.State;
 
 import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+
+/**
+ * 
+ * @author Daniel Jonsson
+ * @license GNU GPLv3
+ *
+ */
 public class CameraSystem extends VoidEntitySystem {
 	
 	private OrthographicCamera camera;
