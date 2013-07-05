@@ -1,4 +1,5 @@
 skuttande-nyan-cat/bin
+skuttande-nyan-cat/libs/gdx-tools.jar
 skuttande-nyan-cat-android/bin
 skuttande-nyan-cat-desktop/bin
 skuttande-nyan-cat-html/gwt-unitCache
@@ -7,3 +8,4 @@ skuttande-nyan-cat-html/war/WEB-INF/classes
 skuttande-nyan-cat-html/war/WEB-INF/deploy
 skuttande-nyan-cat-html/war/assets
 skuttande-nyan-cat-html/war/se.danielj.skuttandenyancat.GwtDefinition
+*.swp
