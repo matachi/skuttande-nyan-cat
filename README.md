@@ -24,6 +24,7 @@ for your Android device.
 * [Particle effect](skuttande-nyan-cat-android/assets/effects) opens with
   LibGDX's [Particle
 Editor](https://code.google.com/p/libgdx/wiki/ParticleEditor).
+* .ora opens with MyPaint.
 
 ## Licenses
 
