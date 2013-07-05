@@ -1,9 +1,21 @@
 # Skuttande Nyan Cat!
 
+![Featured graphic](images/featured-graphic.png)  
+
 Author: Daniel "MaTachi" Jonsson  
 Tools: Eclipse, GIMP, Aseprite, MyPaint, as3sfxr, LibGDX's Particle Editor  
 Development platform: Ubuntu 12.10  
 Libraries: LibGDX, Artemis
+
+![Screenshot 1](images/screenshots/droidAtScreen-124.png)  
+![Screenshot 2](images/screenshots/droidAtScreen-52.png)  
+![Screenshot 3](images/screenshots/droidAtScreen-56.png)
+
+## Install on your Android device from Google Play
+
+Skuttande Nyan Cat! is [available on Google
+Play](https://play.google.com/store/apps/details?id=se.danielj.skuttandenyancat)
+for your Android device.
 
 ## File formats
 
