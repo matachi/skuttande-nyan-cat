@@ -30,10 +30,10 @@ Editor](https://code.google.com/p/libgdx/wiki/ParticleEditor).
 
 ## Licenses
 
-The code I have written is licensed under [GNU GPLv3](LICENSE.txt). The
-images I have made, which are all in `images/`, `sprites/` and `sprites-dev/`
-except the One Game A Month logo, are licensed under Creative Commons
-Attribution-ShareAlike 3.0 Unported ([CC BY-SA
+The code I have written is licensed under [GNU GPLv3](LICENSE.txt). The images
+I have made, which are all in [images/](images/), [sprites/](sprites/) and
+[sprites-dev/](sprites-dev/) except the One Game A Month logo, are licensed
+under Creative Commons Attribution-ShareAlike 3.0 Unported ([CC BY-SA
 3.0](http://creativecommons.org/licenses/by-sa/3.0/)). The particle effects and
 sound effects are also made by me and are licensed under CC BY-SA 3.0.
 
