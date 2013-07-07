@@ -5,7 +5,8 @@
 Author: Daniel "MaTachi" Jonsson  
 Tools: Eclipse, GIMP, Aseprite, MyPaint, as3sfxr, LibGDX's Particle Editor  
 Development platform: Ubuntu 12.10  
-Libraries: LibGDX, Artemis
+Libraries: LibGDX, Artemis  
+Made during January 2013 for One Game A Month
 
 ![Screenshot 1](images/screenshots/droidAtScreen-124.png)  
 ![Screenshot 2](images/screenshots/droidAtScreen-52.png)  
@@ -25,6 +26,7 @@ for your Android device.
   LibGDX's [Particle
 Editor](https://code.google.com/p/libgdx/wiki/ParticleEditor).
 * .ora opens with MyPaint.
+* .ase opens with Aseprite.
 
 ## Licenses
 

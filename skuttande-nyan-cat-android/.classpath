@@ -9,5 +9,6 @@
 	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-android.jar" sourcepath="libs/gdx-backend-android-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="/skuttande-nyan-cat/libs/artemis.jar"/>
 	<classpathentry exported="true" kind="lib" path="/skuttande-nyan-cat/libs/json-simple-1.1.1.jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
